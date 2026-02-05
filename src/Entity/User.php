@@ -48,7 +48,12 @@ class User
     #[ORM\Column(length: 255)]
     #[Groups(['user:read', 'user:write'])]
     #[Assert\NotBlank(message: "Ism bo'sh bo'lmasligi kerak.")]
-    private ?string $givenName = null;
+    private ?string $fullname = null;
+
+    #[ORM\Column(length: 255)]
+    #[Groups(['user:read', 'user:write'])]
+    #[Assert\NotBlank(message: "Familiya bo'sh bo'lmasligi kerak.")]
+    private ?string $surname = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
     #[Groups(['user:read', 'user:write'])]
@@ -110,14 +115,26 @@ class User
         return $this;
     }
 
-    public function getGivenName(): ?string
+    public function getFullname(): ?string
     {
-        return $this->givenName;
+        return $this->fullname;
     }
 
-    public function setGivenName(string $givenName): static
+    public function setFullname(string $fullname): static
     {
-        $this->givenName = $givenName;
+        $this->fullname = $fullname;
+
+        return $this;
+    }
+
+    public function getSurname(): ?string
+    {
+        return $this->surname;
+    }
+
+    public function setSurname(string $surname): static
+    {
+        $this->surname = $surname;
 
         return $this;
     }
@@ -181,4 +198,5 @@ class User
 
         return $this;
     }
+
 }
